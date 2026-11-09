@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.1 (first public release, November 10, 2026)
+## 0.4.1 (first public release, November 9, 2026)
 
 Recall fixes to the static checks, from the miss backlog (shapes a check should have caught and did not):
 
