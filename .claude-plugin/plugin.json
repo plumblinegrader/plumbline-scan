@@ -1,0 +1,10 @@
+{
+  "name": "plumbline-scan",
+  "version": "0.4.1",
+  "description": "Plumbline Scan for coding agents: 12 mechanical checks (PS-1 to PS-12) for grader defects in Harbor-format tasks. Local only: no model calls, nothing uploaded.",
+  "author": {"name": "Plumbline Grader", "url": "https://plumblinegrader.com"},
+  "homepage": "https://plumblinegrader.com",
+  "repository": "https://github.com/plumblinegrader/plumbline-scan",
+  "license": "Apache-2.0",
+  "keywords": ["evaluation", "benchmarks", "reward-hacking", "harbor", "graders", "lint"]
+}

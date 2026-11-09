@@ -1,0 +1,8 @@
+# pre-commit hook: a fast static pass (--estimate loads and validates every task.toml; no Docker).
+# The full scan needs Docker and minutes per task; run it in CI (action.yml) rather than on every commit.
+- id: plumbline-scan-validate
+  name: plumbline-scan (validate Harbor tasks)
+  entry: plumbline-scan --estimate
+  language: python
+  pass_filenames: false
+  args: ["tasks"]

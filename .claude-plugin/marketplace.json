@@ -1,0 +1,12 @@
+{
+  "name": "plumblinegrader",
+  "owner": {"name": "Plumbline Grader", "url": "https://plumblinegrader.com"},
+  "plugins": [
+    {
+      "name": "plumbline-scan",
+      "source": "./",
+      "description": "Check Harbor-format tasks for grader defects before release (PS-1 to PS-12). Local only.",
+      "version": "0.4.1"
+    }
+  ]
+}

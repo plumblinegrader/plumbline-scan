@@ -1,0 +1,9 @@
+version = "1.0"
+
+[verifier]
+timeout_sec = 60.0
+network_mode = "no-network"
+
+[environment]
+cpus = 1
+memory_mb = 256

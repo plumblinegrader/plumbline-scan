@@ -1,0 +1,16 @@
+# .github/workflows/plumbline-scan.yml: scan the tasks a pull request touches.
+name: Plumbline Scan
+on:
+  pull_request:
+    paths: ["tasks/**"]
+permissions:
+  contents: read
+  security-events: write   # for the SARIF upload
+jobs:
+  scan:
+    runs-on: ubuntu-latest  # Docker is preinstalled
+    steps:
+      - uses: actions/checkout@v4
+      - uses: plumblinegrader/plumbline-scan@v1
+        with:
+          path: tasks

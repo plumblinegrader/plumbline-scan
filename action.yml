@@ -1,0 +1,64 @@
+name: Plumbline Scan
+description: Mechanical checks for Harbor-format tasks (PS-1 to PS-6 run the task in Docker; PS-7 to PS-12 read the grader files). No API keys, no models.
+branding:
+  icon: check-square
+  color: green
+inputs:
+  path:
+    description: Task directory, or a directory of task directories (space-separate several)
+    required: true
+  k:
+    description: Reference runs per task
+    default: "3"
+  jobs:
+    description: Tasks scanned in parallel
+    default: "2"
+  args:
+    description: Extra plumbline-scan arguments (e.g. "--network sealed --skip editable_input")
+    default: ""
+  upload-sarif:
+    description: "Upload scan.sarif to GitHub code scanning (needs security-events: write)"
+    default: "true"
+  fail-on-findings:
+    description: Fail the job when any task is flagged
+    default: "true"
+outputs:
+  flagged:
+    description: '"true" when any task was flagged'
+    value: ${{ steps.scan.outputs.flagged }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Install plumbline-scan
+      shell: bash
+      run: python -m pip install --quiet "${{ github.action_path }}"
+    - name: Scan
+      id: scan
+      shell: bash
+      run: |
+        set +e
+        plumbline-scan ${{ inputs.path }} -o plumbline-scan-out -k "${{ inputs.k }}" -j "${{ inputs.jobs }}" \
+          --sarif-root "$GITHUB_WORKSPACE" --rm-images ${{ inputs.args }}
+        rc=$?
+        [ "$rc" = 1 ] && echo "flagged=true" >> "$GITHUB_OUTPUT" || echo "flagged=false" >> "$GITHUB_OUTPUT"
+        [ -f plumbline-scan-out/scan.md ] && cat plumbline-scan-out/scan.md >> "$GITHUB_STEP_SUMMARY"
+        [ "$rc" -le 1 ] || exit "$rc"
+    - name: Upload SARIF
+      if: ${{ inputs.upload-sarif == 'true' && always() }}
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: plumbline-scan-out/scan.sarif
+        category: plumbline-scan
+    - name: Keep the report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: plumbline-scan-report
+        path: plumbline-scan-out/
+    - name: Fail on findings
+      if: ${{ inputs.fail-on-findings == 'true' && steps.scan.outputs.flagged == 'true' }}
+      shell: bash
+      run: echo "Plumbline Scan flagged at least one task; see the job summary." && exit 1

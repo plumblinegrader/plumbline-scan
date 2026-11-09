@@ -1,0 +1,6 @@
+apple
+banana
+orange
+cherry
+umbrella
+kiwi

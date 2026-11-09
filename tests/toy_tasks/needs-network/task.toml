@@ -1,0 +1,11 @@
+version = "1.0"
+
+[agent]
+timeout_sec = 120.0
+
+[verifier]
+timeout_sec = 120.0
+
+[environment]
+cpus = 1
+memory_mb = 512

@@ -1,0 +1,22 @@
+---
+description: Check Harbor-format AI training or evaluation tasks (folders with task.toml, tests/test.sh) for grader defects with Plumbline Scan. Use when asked to scan, lint or review a task or its verifier.
+globs: ["**/task.toml", "**/tests/test.sh"]
+alwaysApply: false
+---
+
+# Plumbline Scan
+
+When the user asks to check, scan, lint or review a Harbor-format task (a folder with `task.toml`, `tests/`,
+`solution/`, `environment/`), or asks whether a grader can be passed without doing the task:
+
+1. Run, from the project root:
+   `python3 .cursor/plumbline-scan/run_scan.py <tasks path> --out plumbline-scan-out`
+   (static checks PS-7 to PS-12: no Docker, no network). Add `--full` only if the user wants the Docker checks
+   PS-1 to PS-6. Exit code 1 means a task was flagged (a result, not an error); exit code 3 means the scanner is
+   missing: show the install line it prints.
+2. Report the verdict counts and one line per FLAG or WARN (task, check ID, what it found, how to fix). Keep the
+   closing caveats.
+3. Offer to apply a fix line to the verifier; re-run the scan on that task afterwards.
+
+Never call a task "safe" or "certified": a clean scan does not show the tests are strong enough, and a static flag
+is a lead, not proof. Do not upload or send results anywhere.

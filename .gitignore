@@ -1,0 +1,6 @@
+plumbline-scan-out/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+build/
+dist/
