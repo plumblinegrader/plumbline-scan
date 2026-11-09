@@ -11,6 +11,6 @@ jobs:
     runs-on: ubuntu-latest  # Docker is preinstalled
     steps:
       - uses: actions/checkout@v4
-      - uses: plumblinegrader/plumbline-scan@v1
+      - uses: plumblinegrader/plumbline-scan@v0.4.1
         with:
           path: tasks

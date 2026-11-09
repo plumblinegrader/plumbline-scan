@@ -30,7 +30,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 INSTALL_HINT = (
     "Plumbline Scan is not installed. Install it (Python 3.11+, no runtime dependencies):\n"
-    "  pip install git+https://github.com/plumblinegrader/plumbline-scan@v1\n"
+    "  pip install git+https://github.com/plumblinegrader/plumbline-scan@v0.4.1\n"
     "or install this skill from the plumbline-scan repository, which bundles the scanner."
 )
 CAVEATS = [

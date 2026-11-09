@@ -64,7 +64,7 @@ reproduce it, the log to read).
 permissions: { contents: read, security-events: write }
 steps:
   - uses: actions/checkout@v4
-  - uses: plumblinegrader/plumbline-scan@v1   # action.yml at the root of this repository
+  - uses: plumblinegrader/plumbline-scan@v0.4.1   # action.yml at the root of this repository
     with:
       path: tasks
 ```

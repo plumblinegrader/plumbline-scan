@@ -96,7 +96,7 @@ def main(argv: list[str] | None = None) -> int:
     for p in written:
         print("wrote", p)
     if not any(p.name == "vendor" for p in written):
-        print("Scanner not bundled: install it with  pip install git+https://github.com/plumblinegrader/plumbline-scan@v1")
+        print("Scanner not bundled: install it with  pip install git+https://github.com/plumblinegrader/plumbline-scan@v0.4.1")
     if a.agent == "codex":
         print("If your Codex version does not load skills, paste AGENTS-snippet.md into your AGENTS.md.")
     return 0
