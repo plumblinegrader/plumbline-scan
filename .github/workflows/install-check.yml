@@ -1,0 +1,25 @@
+name: install-check
+
+# Installs the scanner on Linux and macOS and runs its no-Docker tests and a static-only scan of the toy tasks.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install '.[test]'
+      - run: python -m pytest -q -m "not docker"
+      - run: plumbline-scan tests/toy_tasks --static-only -o scan-out
