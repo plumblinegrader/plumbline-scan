@@ -102,13 +102,14 @@ Plumbline repository.
 wrong-solution audit at the prices published on plumblinegrader.com. It loads the tasks only: no Docker, no
 network.
 
-## Privacy: nothing leaves your machine unless you ask
+## Privacy: no scan results are uploaded
 
-A scan talks to Docker (and to registries for image pulls) and nothing else. No scan result is ever sent
-anywhere. One opt-in flag sends data to plumblinegrader.com, and prints exactly what it sends:
+No scan results are uploaded. The static checks (`--static-only`) run fully offline; the Docker checks pull images
+and run tasks as their own network settings allow, and verifying a signed record fetches its public key unless you
+pass one. The only thing that ever goes to us is your email address, and only if you run `--subscribe`.
 
-* `--subscribe you@company.com`: your email address only, to hear about new checks and Index releases. It can be
-  run on its own: `plumbline-scan --subscribe you@company.com`.
+* `--subscribe you@company.com`: your email address only, to hear about new checks and Index releases. It prints
+  exactly what it sends, and can be run on its own: `plumbline-scan --subscribe you@company.com`.
 
 ## How it runs a task
 

@@ -1,6 +1,6 @@
 ---
 name: plumbline-scan
-description: Check Harbor-format AI training or evaluation tasks for grader defects before they ship, using Plumbline Scan's 12 mechanical checks (PS-1 to PS-12). Use when the user asks to scan, lint, check or review a task, a verifier, a tests/test.sh, or a folder of tasks with task.toml files, or asks whether a task's grader can be passed without doing the task. Runs locally; no model calls, no network, nothing uploaded.
+description: Check Harbor-format AI training or evaluation tasks for grader defects before they ship, using Plumbline Scan's 12 mechanical checks (PS-1 to PS-12). Use when the user asks to scan, lint, check or review a task, a verifier, a tests/test.sh, or a folder of tasks with task.toml files, or asks whether a task's grader can be passed without doing the task. Runs locally with no model calls, and no scan results are uploaded; the static checks run fully offline, and the Docker checks (--full) pull images and run tasks as their own network settings allow.
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
